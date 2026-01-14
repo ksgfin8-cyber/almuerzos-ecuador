@@ -384,10 +384,19 @@ const Sistema = {
         }
         
         // Abrir WhatsApp
-       const base = 'https://api.whatsapp.com/send';
+      const base = 'https://api.whatsapp.com/send';
+
+let phone;
+try {
+    phone = normalizarNumeroWhatsAppEC(this.whatsappNumber);
+} catch (e) {
+    alert('Número de WhatsApp inválido. Verifica la configuración.');
+    this.estado = 'ERROR';
+    return;
+}
 
 const params = new URLSearchParams({
-    phone: this.whatsappNumber,
+    phone: phone,
     text: mensaje
 });
 
