@@ -396,21 +396,19 @@ try {
     return;
 }
 
-// 🔍 DIAGNÓSTICO (aquí van los logs)
+// 🔍 DIAGNÓSTICO
 console.log('RAW:', this.whatsappNumber);
 console.log('NORMALIZADO:', phone);
 console.log('LENGTH:', phone.length);
 
-// 🔒 Validación dura (kill switch)
+// 🔒 Validación dura
 if (!/^5939\d{8}$/.test(phone)) {
     alert(`Número inválido detectado: ${phone}`);
     return;
 }
 
-// Mensaje
-const mensaje = generarMensaje(); // o como lo tengas
+// 👉 AQUÍ NO SE VUELVE A CREAR mensaje
 
-// Endpoint FINAL
 const url = `${base}/${phone}?text=${encodeURIComponent(mensaje)}`;
 window.open(url, '_blank');
 
