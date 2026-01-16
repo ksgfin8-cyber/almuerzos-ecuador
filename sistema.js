@@ -419,6 +419,34 @@ window.open(url, '_blank');
 this.estado = 'ENVIADO';
 this.mostrarConfirmacion();
 console.log('✅ Pedido enviado');
+
+
+       function normalizarNumeroWhatsAppEC(numero) {
+    if (!numero) {
+        throw new Error('Número vacío');
+    }
+
+    let limpio = String(numero).trim();
+
+    // eliminar prefijos raros
+    limpio = limpio.replace(/^whatsapp:/i, '');
+
+    // solo dígitos
+    limpio = limpio.replace(/\D/g, '');
+
+    // Caso Ecuador nacional: 09XXXXXXXX
+    if (limpio.startsWith('09') && limpio.length === 10) {
+        limpio = '593' + limpio.slice(1);
+    }
+
+    // Validación E.164 básica (10 a 15 dígitos)
+    if (!/^\d{10,15}$/.test(limpio)) {
+        throw new Error('Formato inválido');
+    }
+
+    return limpio;
+}
+
     
     /* =========================
        CONFIGURACIÓN
