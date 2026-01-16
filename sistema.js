@@ -386,18 +386,37 @@ const Sistema = {
         // Abrir WhatsApp
 
   // Abrir WhatsApp
-        const url = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
-        window.open(url, '_blank');
-        
-        // G.estado = ENVIADO significa "sistema ejecutó envío"
-        // NO significa "pedido confirmado" (eso es externo)
-        this.estado = 'ENVIADO';
-        
-        // Confirmación visual no invasiva
-        this.mostrarConfirmacion();
-        
-        console.log('✅ Pedido enviado');
-    },
+       function abrirWhatsApp(mensaje, rawNumber) {
+
+    // 1️⃣ Normalizar: dejar solo dígitos
+    let num = String(rawNumber).replace(/\D/g, '');
+
+    // 2️⃣ Casos Ecuador
+    if (num.startsWith('0')) {
+        // 0968307331 → 593968307331
+        num = '593' + num.slice(1);
+    }
+
+    if (num.startsWith('9') && num.length === 9) {
+        // 968307331 → 593968307331
+        num = '593' + num;
+    }
+
+    // 3️⃣ Validación final REALISTA
+    if (!/^5939\d{8}$/.test(num)) {
+        console.error('Número inválido final:', num);
+        alert(
+            'Número de WhatsApp mal configurado.\n' +
+            'Debe ser celular Ecuador (09XXXXXXXX).'
+        );
+        return;
+    }
+
+    // 4️⃣ Abrir WhatsApp
+    const url = `https://wa.me/${num}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+
     
     /* =========================
        CONFIGURACIÓN
