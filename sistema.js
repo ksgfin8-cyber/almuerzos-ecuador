@@ -396,32 +396,29 @@ try {
     return;
 }
 
-// 🔍 DIAGNÓSTICO
+// 🔍 Diagnóstico (temporal, luego puedes borrar)
 console.log('RAW:', this.whatsappNumber);
 console.log('NORMALIZADO:', phone);
 console.log('LENGTH:', phone.length);
 
-// 🔒 Validación dura
-if (!/^5939\d{8}$/.test(phone)) {
+// 🔒 Validación REALISTA (E.164)
+// Ecuador móvil → 593 + 9XXXXXXXX (12 dígitos total)
+if (!/^5939\d{7,8}$/.test(phone)) {
     alert(`Número inválido detectado: ${phone}`);
+    this.estado = 'ERROR';
     return;
 }
 
-// 👉 AQUÍ NO SE VUELVE A CREAR mensaje
+// ❗ NO se vuelve a crear mensaje
+// mensaje YA existe (F → Traductor)
 
 const url = `${base}/${phone}?text=${encodeURIComponent(mensaje)}`;
 window.open(url, '_blank');
 
-       
-        // G.estado = ENVIADO significa "sistema ejecutó envío"
-        // NO significa "pedido confirmado" (eso es externo)
-        this.estado = 'ENVIADO';
-        
-        // Confirmación visual no invasiva
-        this.mostrarConfirmacion();
-        
-        console.log('✅ Pedido enviado');
-    },
+// Estado del sistema
+this.estado = 'ENVIADO';
+this.mostrarConfirmacion();
+console.log('✅ Pedido enviado');
     
     /* =========================
        CONFIGURACIÓN
