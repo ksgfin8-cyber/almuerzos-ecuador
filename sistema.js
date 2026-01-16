@@ -246,7 +246,7 @@ const Sistema = {
             this.menu = await this.cargarMenu();
             
             // 2. Cargar configuración local
-            this.whatsappNumber = localStorage.getItem('whatsapp_number') || '593XXXXXXXXX';
+            this.whatsappNumber = localStorage.getItem('whatsapp_number') || '593968307331';
             
             // 3. Crear pedido vacío
             this.pedido = crearPedidoVacio();
@@ -383,40 +383,26 @@ const Sistema = {
             return;
         }
         
+        // Sanitización Unicode (preserva semántica, reduce complejidad)
+        // U+00A0 (non-breaking space) → U+0020 (espacio ASCII)
+        // ━ (box drawing) → - (guión ASCII)
+        const mensajeSanitizado = mensaje
+            .replace(/\u00A0/g, ' ')
+            .replace(/━/g, '-');
+        
         // Abrir WhatsApp
-
-  // Abrir WhatsApp
-       function abrirWhatsApp(mensaje, rawNumber) {
-
-    // 1️⃣ Normalizar: dejar solo dígitos
-    let num = String(rawNumber).replace(/\D/g, '');
-
-    // 2️⃣ Casos Ecuador
-    if (num.startsWith('0')) {
-        // 0968307331 → 593968307331
-        num = '593' + num.slice(1);
-    }
-
-    if (num.startsWith('9') && num.length === 9) {
-        // 968307331 → 593968307331
-        num = '593' + num;
-    }
-
-    // 3️⃣ Validación final REALISTA
-    if (!/^5939\d{8}$/.test(num)) {
-        console.error('Número inválido final:', num);
-        alert(
-            'Número de WhatsApp mal configurado.\n' +
-            'Debe ser celular Ecuador (09XXXXXXXX).'
-        );
-        return;
-    }
-
-    // 4️⃣ Abrir WhatsApp
-    const url = `https://wa.me/${num}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
-}
-
+        const url = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(mensajeSanitizado)}`;
+        window.open(url, '_blank');
+        
+        // G.estado = ENVIADO significa "sistema ejecutó envío"
+        // NO significa "pedido confirmado" (eso es externo)
+        this.estado = 'ENVIADO';
+        
+        // Confirmación visual no invasiva
+        this.mostrarConfirmacion();
+        
+        console.log('✅ Pedido enviado');
+    },
     
     /* =========================
        CONFIGURACIÓN
@@ -446,34 +432,3 @@ const Sistema = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { Sistema, Pedido, Tiempo, Reglas, Traductor };
 }
-
-    
-    /* =========================
-       CONFIGURACIÓN
-    ========================= */
-    
-    guardarConfiguracion(numero) {
-        this.whatsappNumber = numero;
-        localStorage.setItem('whatsapp_number', numero);
-        console.log('💾 Configuración guardada');
-    },
-    
-    /* =========================
-       CONFIRMACIÓN VISUAL
-    ========================= */
-    
-    mostrarConfirmacion() {
-        if (typeof mostrarMensajeConfirmacion === 'function') {
-            mostrarMensajeConfirmacion();
-        }
-    }
-};
-
-/* =======================================================
-   EXPORTACIÓN (si se usa como módulo)
-   ======================================================= */
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { Sistema, Pedido, Tiempo, Reglas, Traductor };
-}
-
