@@ -385,66 +385,47 @@ const Sistema = {
         
         // Abrir WhatsApp
 
-const base = 'https://wa.me';
-
-let phone;
-try {
-    phone = normalizarNumeroWhatsAppEC(this.whatsappNumber);
-} catch (e) {
-    alert('Número de WhatsApp inválido. Verifica la configuración.');
-    this.estado = 'ERROR';
-    return;
-}
-
-// 🔍 Diagnóstico (temporal, luego puedes borrar)
-console.log('RAW:', this.whatsappNumber);
-console.log('NORMALIZADO:', phone);
-console.log('LENGTH:', phone.length);
-
-// 🔒 Validación REALISTA (E.164)
-// Ecuador móvil → 593 + 9XXXXXXXX (12 dígitos total)
-if (!/^5939\d{7,8}$/.test(phone)) {
-    alert(`Número inválido detectado: ${phone}`);
-    this.estado = 'ERROR';
-    return;
-}
-
-// ❗ NO se vuelve a crear mensaje
-// mensaje YA existe (F → Traductor)
-
-const url = `${base}/${phone}?text=${encodeURIComponent(mensaje)}`;
-window.open(url, '_blank');
-
-// Estado del sistema
-this.estado = 'ENVIADO';
-this.mostrarConfirmacion();
-console.log('✅ Pedido enviado');
-
-
-       function normalizarNumeroWhatsAppEC(numero) {
-    if (!numero) {
-        throw new Error('Número vacío');
+  // Abrir WhatsApp
+        const url = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, '_blank');
+        
+        // G.estado = ENVIADO significa "sistema ejecutó envío"
+        // NO significa "pedido confirmado" (eso es externo)
+        this.estado = 'ENVIADO';
+        
+        // Confirmación visual no invasiva
+        this.mostrarConfirmacion();
+        
+        console.log('✅ Pedido enviado');
+    },
+    
+    /* =========================
+       CONFIGURACIÓN
+    ========================= */
+    
+    guardarConfiguracion(numero) {
+        this.whatsappNumber = numero;
+        localStorage.setItem('whatsapp_number', numero);
+        console.log('💾 Configuración guardada');
+    },
+    
+    /* =========================
+       CONFIRMACIÓN VISUAL
+    ========================= */
+    
+    mostrarConfirmacion() {
+        if (typeof mostrarMensajeConfirmacion === 'function') {
+            mostrarMensajeConfirmacion();
+        }
     }
+};
 
-    let limpio = String(numero).trim();
+/* =======================================================
+   EXPORTACIÓN (si se usa como módulo)
+   ======================================================= */
 
-    // eliminar prefijos raros
-    limpio = limpio.replace(/^whatsapp:/i, '');
-
-    // solo dígitos
-    limpio = limpio.replace(/\D/g, '');
-
-    // Caso Ecuador nacional: 09XXXXXXXX
-    if (limpio.startsWith('09') && limpio.length === 10) {
-        limpio = '593' + limpio.slice(1);
-    }
-
-    // Validación E.164 básica (10 a 15 dígitos)
-    if (!/^\d{10,15}$/.test(limpio)) {
-        throw new Error('Formato inválido');
-    }
-
-    return limpio;
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Sistema, Pedido, Tiempo, Reglas, Traductor };
 }
 
     
