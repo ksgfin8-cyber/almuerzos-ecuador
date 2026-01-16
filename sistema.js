@@ -384,7 +384,9 @@ const Sistema = {
         }
         
         // Abrir WhatsApp
-      const base = 'https://api.whatsapp.com/send';
+// Abrir WhatsApp (SCRIPT COMPLETO)
+
+const base = 'https://wa.me';
 
 let phone;
 try {
@@ -395,12 +397,24 @@ try {
     return;
 }
 
-const params = new URLSearchParams({
-    phone: phone,
-    text: mensaje
-});
+// 🔍 DIAGNÓSTICO (aquí van los logs)
+console.log('RAW:', this.whatsappNumber);
+console.log('NORMALIZADO:', phone);
+console.log('LENGTH:', phone.length);
 
-window.open(`${base}?${params.toString()}`, '_blank');
+// 🔒 Validación dura (kill switch)
+if (!/^5939\d{8}$/.test(phone)) {
+    alert(`Número inválido detectado: ${phone}`);
+    return;
+}
+
+// Mensaje
+const mensaje = generarMensaje(); // o como lo tengas
+
+// Endpoint FINAL
+const url = `${base}/${phone}?text=${encodeURIComponent(mensaje)}`;
+window.open(url, '_blank');
+
 
         
         // G.estado = ENVIADO significa "sistema ejecutó envío"
