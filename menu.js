@@ -43,4 +43,3 @@ const MENU_DATA = {
         }
     }
 };
-
