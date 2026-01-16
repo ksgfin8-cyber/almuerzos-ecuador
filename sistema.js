@@ -384,7 +384,6 @@ const Sistema = {
         }
         
         // Abrir WhatsApp
-// Abrir WhatsApp (SCRIPT COMPLETO)
 
 const base = 'https://wa.me';
 
@@ -415,8 +414,7 @@ const mensaje = generarMensaje(); // o como lo tengas
 const url = `${base}/${phone}?text=${encodeURIComponent(mensaje)}`;
 window.open(url, '_blank');
 
-
-        
+       
         // G.estado = ENVIADO significa "sistema ejecutó envío"
         // NO significa "pedido confirmado" (eso es externo)
         this.estado = 'ENVIADO';
