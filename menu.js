@@ -28,6 +28,20 @@ const MENU_DATA = {
             "emoji": "🍛",
             "descripcion": "Sopa + Segundo B",
             "detalleHoy": "Seco de carne"
+        },
+        "SEGUNDO_A": {
+            "id": "SEGUNDO_A",
+            "nombre": "Segundo A",
+            "emoji": "🍗",
+            "descripcion": "Solo segundo (sin sopa)",
+            "detalleHoy": "Pollo guisado con arroz"
+        },
+        "SEGUNDO_B": {
+            "id": "SEGUNDO_B",
+            "nombre": "Segundo B",
+            "emoji": "🥩",
+            "descripcion": "Solo segundo (sin sopa)",
+            "detalleHoy": "Seco de carne"
         }
     },
     "extras": {
