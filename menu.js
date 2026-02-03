@@ -18,7 +18,7 @@ const MENU_DATA = {
         "A": {
             "id": "A",
             "nombre": "Almuerzo A",
-            "emoji": "🍱",
+            "emoji": "🍛",
             "descripcion": "Sopa + Segundo A",
             "detalleHoy": "Arroz con menetra y corvina apanada"
         },
@@ -32,16 +32,16 @@ const MENU_DATA = {
         "SEGUNDO_A": {
             "id": "SEGUNDO_A",
             "nombre": "Segundo A",
-            "emoji": "🍗",
+            "emoji": "🐟",
             "descripcion": "Solo segundo (sin sopa)",
-            "detalleHoy": "Arroz con menetra y corvina apanada"
+            "detalleHoy": "Cazuela Alvacora"
         },
         "SEGUNDO_B": {
             "id": "SEGUNDO_B",
             "nombre": "Segundo B",
-            "emoji": "🥩",
+            "emoji": "🍗",
             "descripcion": "Solo segundo (sin sopa)",
-            "detalleHoy": "Carne frita con ensalada de frijoles"
+            "detalleHoy": "Pollo a la Coca-cola"
         }
     },
     "extras": {
