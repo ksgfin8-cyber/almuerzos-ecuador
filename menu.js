@@ -27,7 +27,7 @@ const MENU_DATA = {
             "nombre": "Almuerzo B",
             "emoji": "🍛",
             "descripcion": "Sopa + Segundo B",
-            "detalleHoy": "Pollo a la Coca-cola"
+            "detalleHoy": "Pollo a la Coca-cola con pure"
         },
         "SEGUNDO_A": {
             "id": "SEGUNDO_A",
