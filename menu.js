@@ -20,7 +20,7 @@ const MENU_DATA = {
             "nombre": "Almuerzo A",
             "emoji": "🍛",
             "descripcion": "Sopa + Segundo A",
-            "detalleHoy": "Cazuela Alvacora"
+            "detalleHoy": "Alvacora"
         },
         "B": {
             "id": "B",
@@ -34,14 +34,14 @@ const MENU_DATA = {
             "nombre": "Segundo A",
             "emoji": "🐟",
             "descripcion": "Solo segundo (sin sopa)",
-            "detalleHoy": "Cazuela Alvacora"
+            "detalleHoy": "Cazuela"
         },
         "SEGUNDO_B": {
             "id": "SEGUNDO_B",
             "nombre": "Segundo B",
             "emoji": "🍗",
             "descripcion": "Solo segundo (sin sopa)",
-            "detalleHoy": "Pollo a la Coca-cola"
+            "detalleHoy": "Pollo"
         }
     },
     "extras": {
