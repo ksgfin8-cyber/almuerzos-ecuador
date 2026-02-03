@@ -13,7 +13,7 @@ const MENU_DATA = {
             "nombre": "Sopa del día",
             "emoji": "🥣",
             "descripcion": "Solo sopa caliente",
-            "detalleHoy": "Caldo de Bola"
+            "detalleHoy": "Caldo de lentejas-queso"
         },
         "A": {
             "id": "A",
