@@ -39,7 +39,7 @@ const MENU_DATA = {
         "SEGUNDO_B": {
             "id": "SEGUNDO_B",
             "nombre": "Segundo B",
-            "emoji": "🍤",
+            "emoji": "🥩",
             "descripcion": "Solo segundo (sin sopa)",
             "detalleHoy": "Guatita"
         }
