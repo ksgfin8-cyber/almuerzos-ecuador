@@ -18,14 +18,14 @@ const MENU_DATA = {
         "A": {
             "id": "A",
             "nombre": "Almuerzo A",
-            "emoji": "🍛🍲",
+            "emoji": "🍛🥘",
             "descripcion": "Sopa + Segundo A",
             "detalleHoy": "Moro de lenteja con chuleta"
         },
         "B": {
             "id": "B",
             "nombre": "Almuerzo B",
-            "emoji": "🍛🍲",
+            "emoji": "🍛🥘",
             "descripcion": "Sopa + Segundo B",
             "detalleHoy": "Menestra con carne apanada"
         },
